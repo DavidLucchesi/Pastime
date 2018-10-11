@@ -68,8 +68,8 @@ object FileManager {
             val splittedPath = folderPath.split("\\\\".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             val oldFolderName = splittedPath[splittedPath.size - 1]
             val newFolderName = oldFolderName + dateFormat.format(date)
-            val archiveDesinationPath = "D:\\Pastime\\files\\archive\\$newFolderName"
-            val archiveDestination = File(archiveDesinationPath)
+            val archiveDestinationPath = "D:\\Pastime\\files\\archive\\$newFolderName"
+            val archiveDestination = File(archiveDestinationPath)
             try {
                 FileUtils.copyDirectory(folder, archiveDestination)
             } catch (e: IOException) {
