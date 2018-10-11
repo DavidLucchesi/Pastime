@@ -108,7 +108,7 @@ object WebCrawler {
         val date = Date()
         FileManager.createDirectory("D:\\Pastime\\files\\website\\links")
         val pageWithoutSpecialCharacters = page.replace("/", "-S-").replace("?", "-B-").replace("%", "-P-").replace("*", "-W-")
-        val websiteFile = "D:\\Pastime\\files\\website\\links\\$pageWithoutSpecialCharacters-" + dateFormat.format(date) + ".txt"
+        val websiteFile = "D:\\Pastime\\files\\website\\links\\L-$pageWithoutSpecialCharacters-" + dateFormat.format(date) + ".txt"
         FileManager.createFile(websiteFile)
 
         try {
