@@ -19,7 +19,7 @@ object FileManager {
         return 0
     }
 
-    fun deleteFile(filePath: String): Int {
+    private fun deleteFile(filePath: String): Int {
         val file = File(filePath)
         if (file.exists()) {
             if (!file.delete())
@@ -28,7 +28,8 @@ object FileManager {
         return 0
     }
 
-    fun createNewFile(filePath: String): Int {
+    @Suppress("unused")
+    private fun createNewFile(filePath: String): Int {
         val i = deleteFile(filePath)
         return i + createFile(filePath)
     }
@@ -45,7 +46,8 @@ object FileManager {
         return 0
     }
 
-    fun copyFile(initialFilePath: String, finalFilePath: String): Int {
+    @Suppress("unused")
+    private fun copyFile(initialFilePath: String, finalFilePath: String): Int {
         val oldFile = File(initialFilePath)
         val newFile = File(finalFilePath)
         try {
@@ -60,10 +62,10 @@ object FileManager {
 
     fun archiveFolderContent(folderPath: String): Int {
         val folder = File(folderPath)
-        if (folder.list()!!.size != 0) {
+        if (folder.list()!!.isNotEmpty()) {
             val dateFormat = SimpleDateFormat("-yyyyMMdd-HHmmss")
             val date = Date()
-            val splittedPath = folderPath.split("\\\\".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
+            val splittedPath = folderPath.split("\\\\".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             val oldFolderName = splittedPath[splittedPath.size - 1]
             val newFolderName = oldFolderName + dateFormat.format(date)
             val archiveDesinationPath = "D:\\Pastime\\files\\archive\\$newFolderName"

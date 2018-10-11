@@ -6,16 +6,16 @@ import java.util.*
 
 object LogManager {
 
-    fun clearLogPart(): Int {
+    private fun clearLogPart(): Int {
         FileManager.archiveFolderContent("D:\\Pastime\\files\\log")
         return FileManager.deleteAllFilesInFolder("D:\\Pastime\\files\\log")
     }
 
-    fun createLogDirectory(): Int {
+    private fun createLogDirectory(): Int {
         return FileManager.createDirectory("D:\\Pastime\\files\\log")
     }
 
-    fun createLogFile(): Int {
+    private fun createLogFile(): Int {
         return FileManager.createFile("D:\\Pastime\\files\\log\\log.txt")
     }
 
@@ -23,10 +23,8 @@ object LogManager {
         val logFile = File("D:\\Pastime\\files\\log\\log.txt")
         try {
             val writer = FileWriter(logFile, true)
-            try {
-                writer.write(message)
-            } finally {
-                writer.close()
+            writer.use { writerUsed ->
+                writerUsed.write(message +"\n")
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -42,7 +40,7 @@ object LogManager {
         createLogFile()
         val dateFormat = SimpleDateFormat("yyyy/MM/dd - HH:mm:ss")
         val date = Date()
-        return writeLog("Started at : " + dateFormat.format(date) + "\n")
+        return writeLog("Started at : " + dateFormat.format(date))
     }
 
     fun end(): Int {
