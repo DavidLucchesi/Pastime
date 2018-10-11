@@ -60,7 +60,8 @@ object WebCrawler {
         val dateFormat = SimpleDateFormat("yyyyMMddHHmmss")
         val date = Date()
         FileManager.createDirectory("D:\\Pastime\\files\\website")
-        val websiteFile = "D:\\Pastime\\files\\website\\$page-" + dateFormat.format(date) + ".txt"
+        val pageWithoutSpecialCharacters = page.replace("/","-S-").replace("?","-B-").replace("%","-P-").replace("*","-W-")
+        val websiteFile = "D:\\Pastime\\files\\website\\$pageWithoutSpecialCharacters-" + dateFormat.format(date) + ".txt"
         FileManager.createFile(websiteFile)
 
         try {
@@ -68,7 +69,7 @@ object WebCrawler {
             for (i in fields) {
                 if (i == fields[0]) {
                     val writer = FileWriter(websiteFile, true)
-                    writer.use { writerUsed -> writerUsed.write("$i") }
+                    writer.use { writerUsed -> writerUsed.write(i) }
                 } else {
                     val writer = FileWriter(websiteFile, true)
                     writer.use { writerUsed -> writerUsed.write("<$i\n") }
@@ -83,6 +84,7 @@ object WebCrawler {
 
     }
 
+    @Suppress("unused")
     fun runDisplayPage(searchField: String) {
         init()
         displayHTTPPage(getHTTPPage(searchField), searchField)
