@@ -23,9 +23,7 @@ object LogManager {
         val logFile = File("D:\\Pastime\\files\\log\\log.txt")
         try {
             val writer = FileWriter(logFile, true)
-            writer.use { writerUsed ->
-                writerUsed.write(message +"\n")
-            }
+            writer.use { writerUsed -> writerUsed.write(message + "\n") }
         } catch (e: IOException) {
             e.printStackTrace()
             return -1
