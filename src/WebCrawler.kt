@@ -12,13 +12,13 @@ object WebCrawler {
     private fun init() {
         val dateFormat = SimpleDateFormat("yyyy/MM/dd - HH:mm:ss")
         val date = Date()
-        LogManager.writeLog("Web Crawler launching at : " + dateFormat.format(date))
+        LogManager.writeLog("Web Crawler started at : " + dateFormat.format(date))
     }
 
     private fun end() {
         val dateFormat = SimpleDateFormat("yyyy/MM/dd - HH:mm:ss")
         val date = Date()
-        LogManager.writeLog("Web Crawler ending at : " + dateFormat.format(date))
+        LogManager.writeLog("Web Crawler ended at : " + dateFormat.format(date))
     }
 
     private fun getHTTPPage(page: String): List<String> {
@@ -74,11 +74,13 @@ object WebCrawler {
                     writer.use { writerUsed -> writerUsed.write("<$i\n") }
                 }
             }
+            LogManager.writeLog("HTTP Page for $page stocked")
         } catch (e: IOException) {
+            LogManager.writeLog("A problem occurred during while stocking HTTP Page for $page")
             e.printStackTrace()
         }
 
-        LogManager.writeLog("HTTP Page for $page stocked")
+
     }
 
     fun runDisplayPage(searchField: String) {
